@@ -17,6 +17,7 @@ public class Main {
         }
     }
 
+
     public static boolean isFinished() {
 
         if (health[0] == 0) {
@@ -32,6 +33,7 @@ public class Main {
 
     public static void round() {
 
+
         for (int i = 1; i <= 4; i++) {
 
             health[i] = hitPlayer(i); // Босс бьет героя
@@ -40,16 +42,15 @@ public class Main {
 
 
         }
-        System.out.println(" ");
-        System.out.println("Медик помогает герою");
         printStatistics();
     }
+
 
     public static int helpMedical(int playerIndex) {
 
         if (health[playerIndex] > 0 || health[4] > 0) {
 
-            return health[playerIndex] + damage[4];
+                return health[playerIndex] + damage[4];
         }
         return health[playerIndex];
     }
@@ -62,20 +63,20 @@ public class Main {
         return hitTypes[randomNumber];
     }
 
-
     public static int hitBoss(int playerIndex) {
 
-        if (health[0] <= 0) {
+        if (health[0] <= damage[playerIndex]) {
             return health[0] = 0;
         }
 
+
         if (hitTypes[playerIndex].equals(hitTypes[4])) {
-            return health[0];
+            return health[0] = health[0];
         }
 
 
         Random r = new Random();
-        int randomNumber = r.nextInt(3) + 1;// генерируем случайное число от 1 до 5
+        int randomNumber = r.nextInt(4) + 1;// генерируем случайное число от 1 до 5
 
         if (hitTypes[0].equals(hitTypes[playerIndex])) {
 
@@ -92,8 +93,13 @@ public class Main {
 
 
     public static int hitPlayer(int playerIndex) {
+
+            if (health[playerIndex] <= damage[0]) {
+            return health[playerIndex] = 0;
+        }
         return health[playerIndex] - damage[0];
     }
+
 
     public static void printStatistics() {
         System.out.println("_________________________");
